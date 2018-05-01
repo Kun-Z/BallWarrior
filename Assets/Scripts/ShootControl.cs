@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShootControl : MonoBehaviour {
     public List<GameObject> BallList = new List<GameObject>();
+    bool IsStart = true;
     // Use this for initialization
     void Start () {
 		
@@ -12,14 +13,19 @@ public class ShootControl : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (IsStart)
         {
-            Vector2 mTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            foreach (GameObject Balls in BallList)
+            if (Input.GetMouseButtonUp(0))
             {
-                Vector2 mDirection = new Vector2(mTarget.x - Balls.transform.position.x, mTarget.y - Balls.transform.position.y);
-                print(mDirection);
-                Balls.GetComponent<Rigidbody2D>().AddForce(mDirection * 50);
+                IsStart = false;
+                Vector2 mTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                foreach (GameObject Balls in BallList)
+                {
+                    Vector2 mDirection = new Vector2(mTarget.x - Balls.transform.position.x, mTarget.y - Balls.transform.position.y);
+                    Vector2 nDirection = mDirection.normalized;
+                    print(nDirection);
+                    Balls.GetComponent<Rigidbody2D>().AddForce(nDirection * 20);
+                }
             }
         }
     }

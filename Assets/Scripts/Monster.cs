@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Moster : MonoBehaviour {
+public class Monster : MonoBehaviour {
     public int Hp;
+    public int Id;
 	// Use this for initialization
 	void Start () {
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -15,6 +17,7 @@ public class Moster : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Hp -= 1;
+        GetComponentInChildren<Text>().text = Hp.ToString();
         if (Hp == 0)
         {
             GameObject.Destroy(gameObject);
