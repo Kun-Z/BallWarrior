@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ChangeNum : MonoBehaviour {
-
 	// Use this for initialization
 	void Start () {
         this.GetComponent<Button>().onClick.AddListener(OnClick);
@@ -16,14 +15,21 @@ public class ChangeNum : MonoBehaviour {
 
     private void OnClick()
     {
-        GameObject obj = (GameObject)Resources.Load("Prefabs/Ball");
-        GameObject NewBall = Instantiate(obj);
-        string name = string.Concat("Ball", 1);
-        NewBall.name = name;
-        GameObject Ballobj = GameObject.Find("name");
+        GameManager.BallNum += 1;
+        //print("BallNum:" + GameManager.BallNum);
+        if (GameManager.BallNum - GameManager.FlyBallNum == 1)
+        {
+            GameManager.IsShoot = true;
+        }
+    }
+    
+    private void CopyDirection()
+    {
+        GameObject Ballobj = GameObject.Find("Ball0");
+        print(Ballobj);
         Vector3 CurDirection = Ballobj.GetComponent<Rigidbody2D>().velocity;
         print(CurDirection);
         Vector3 NewDirection = CurDirection.normalized;
-        Ballobj.GetComponent<Rigidbody2D>().AddForce(NewDirection * 20);
+        //NewBall.GetComponent<Rigidbody2D>().AddForce(NewDirection * 30);
     }
 }
