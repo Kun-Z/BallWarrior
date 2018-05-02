@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ChangeNum : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
-        this.GetComponent<Button>().onClick.AddListener(OnClick);
+        GetComponent<Button>().onClick.AddListener(OnClick);
     }
 	
 	// Update is called once per frame
@@ -17,19 +17,21 @@ public class ChangeNum : MonoBehaviour {
     {
         GameManager.BallNum += 1;
         //print("BallNum:" + GameManager.BallNum);
-        if (GameManager.BallNum - GameManager.FlyBallNum == 1)
-        {
-            GameManager.IsShoot = true;
-        }
+        GameObject obj = (GameObject)Resources.Load("Prefabs/Ball");
+        GameObject NewBall = Instantiate(obj);
+        //重新命名
+        string name = string.Concat("Ball", GameManager.BallNum);
+        NewBall.name = name;
+        //改变父级
+        GameObject mFather = GameObject.Find("BallList");
+        NewBall.transform.parent = mFather.transform;
+        //可以发射
+        GameManager.IsStart = true;
+        //关闭UI点击
+        GameObject.Find("Canvas/Num").GetComponent<Button>().enabled = false;
+        GameObject.Find("Canvas/Scale").GetComponent<Button>().enabled = false;
+        //设置子弹时间
+        Time.timeScale = 0.2f;
     }
-    
-    private void CopyDirection()
-    {
-        GameObject Ballobj = GameObject.Find("Ball0");
-        print(Ballobj);
-        Vector3 CurDirection = Ballobj.GetComponent<Rigidbody2D>().velocity;
-        print(CurDirection);
-        Vector3 NewDirection = CurDirection.normalized;
-        //NewBall.GetComponent<Rigidbody2D>().AddForce(NewDirection * 30);
-    }
+
 }

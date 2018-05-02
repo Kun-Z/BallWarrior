@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShootControl : MonoBehaviour {
+    LineRenderer Line;
     // Use this for initialization
     void Start () {
 		
@@ -11,41 +13,38 @@ public class ShootControl : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.IsShoot)
-        {
-            CreateBall();
-        }
         if (GameManager.IsStart)
         {
+            Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Line = GetComponent<LineRenderer>();
+            Line.SetPosition(0, MousePos);
             if (Input.GetMouseButtonUp(0))
             {
+                //关闭发射
                 GameManager.IsStart = false;
-                GameManager.FlyBallNum += 1;
                 string objName = string.Concat("Ball", GameManager.BallNum);
                 GameObject obj = GameObject.Find(objName);
                 print("ShootBallName:" + obj);
+                //获取方向
                 Vector2 mTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 mDirection = new Vector2(mTarget.x - obj.transform.position.x, mTarget.y - obj.transform.position.y);
                 Vector2 nDirection = mDirection.normalized;
                 //print(nDirection);
+                //打开box
+                obj.GetComponent<Collider2D>().enabled = true;
+                //发射
                 obj.GetComponent<Rigidbody2D>().AddForce(nDirection * 30);
-                if (GameManager.FlyBallNum < GameManager.BallNum)
-                {
-                    GameManager.IsShoot = true;
-                }
+                //恢复UI
+                GameObject.Find("Canvas/Num").GetComponent<Button>().enabled = true;
+                GameObject.Find("Canvas/Scale").GetComponent<Button>().enabled = true;
+                //恢复时间
+                Time.timeScale = 1.0f;
             }
         }
     }
 
     void CreateBall()
     {
-        GameObject obj = (GameObject)Resources.Load("Prefabs/Ball");
-        GameObject NewBall = Instantiate(obj);
-        string name = string.Concat("Ball", GameManager.FlyBallNum+1);
-        NewBall.name = name;
-        GameObject mFather = GameObject.Find("BallList");
-        NewBall.transform.parent = mFather.transform;
-        GameManager.IsShoot = false;
-        GameManager.IsStart = true;
+      
     }
  }
