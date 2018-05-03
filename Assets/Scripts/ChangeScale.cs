@@ -15,6 +15,7 @@ public class ChangeScale : MonoBehaviour {
 
     private void OnClick()
     {
+        GameManager.BallScale += 1;
         int RandomNum = Random.Range(1, GameManager.BallNum + 1);
         print("RandomNum:"+ RandomNum);
         string RandomBall = string.Concat("Ball", RandomNum);
@@ -22,5 +23,7 @@ public class ChangeScale : MonoBehaviour {
         Vector3 CurScale = obj.transform.localScale;
         Vector3 NewScale = CurScale + new Vector3(0.1f, 0.1f, 0);
         obj.transform.localScale = NewScale;
+        //改变等级
+        GameObject.Find("Canvas/Scale/lvl").GetComponent<Text>().text = string.Concat("LV.", GameManager.BallScale);
     }
 }

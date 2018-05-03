@@ -7,21 +7,23 @@ public class ShootControl : MonoBehaviour {
     LineRenderer Line;
     // Use this for initialization
     void Start () {
-		
-	 }
+        Line = Camera.main.GetComponent<LineRenderer>();
+    }
 
     // Update is called once per frame
     void Update()
     {
         if (GameManager.IsStart)
         {
+            Line.enabled = true;
             Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Line = GetComponent<LineRenderer>();
             Line.SetPosition(0, MousePos);
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButton(0))
             {
                 //关闭发射
                 GameManager.IsStart = false;
+                //删除连线
+                Line.enabled = false;
                 string objName = string.Concat("Ball", GameManager.BallNum);
                 GameObject obj = GameObject.Find(objName);
                 print("ShootBallName:" + obj);
@@ -41,10 +43,5 @@ public class ShootControl : MonoBehaviour {
                 Time.timeScale = 1.0f;
             }
         }
-    }
-
-    void CreateBall()
-    {
-      
     }
  }

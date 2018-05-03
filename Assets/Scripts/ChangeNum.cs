@@ -25,13 +25,15 @@ public class ChangeNum : MonoBehaviour {
         //改变父级
         GameObject mFather = GameObject.Find("BallList");
         NewBall.transform.parent = mFather.transform;
-        //可以发射
-        GameManager.IsStart = true;
+        //改变等级
+        GameObject.Find("Canvas/Num/lvl").GetComponent<Text>().text = string.Concat("LV.", GameManager.BallNum);
         //关闭UI点击
         GameObject.Find("Canvas/Num").GetComponent<Button>().enabled = false;
         GameObject.Find("Canvas/Scale").GetComponent<Button>().enabled = false;
         //设置子弹时间
         Time.timeScale = 0.2f;
+        //可以发射
+        GameManager.IsStart = true;
     }
 
 }

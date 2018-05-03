@@ -17,6 +17,8 @@ public class Monster : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Hp -= 1;
+        GameManager.Point += 1;
+        GameObject.Find("Canvas/Point").GetComponent<Text>().text = GameManager.Point.ToString();
         GetComponentInChildren<Text>().text = Hp.ToString();
         if (Hp == 0)
         {
