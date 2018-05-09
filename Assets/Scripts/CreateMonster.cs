@@ -25,7 +25,12 @@ public class CreateMonster : MonoBehaviour {
         Hp = 17;
         GameObject mFather = GameObject.Find("MonsterList");
         Monster.transform.parent = mFather.transform;
-        Monster.transform.position = new Vector2(Random.Range(-4.0f, 5.0f), Random.Range(-8.0f, 10.0f));
+        int index = Random.Range(0, GameManager.MonsterPos.Count);
+        Vector2 NewPos = GameManager.MonsterPos[index];
+        Monster.transform.position = NewPos * 1.5f;
+        GameManager.MonsterPos.RemoveAt(index);
+        //Monster.transform.position = new Vector2(Random.Range(-4.0f, 5.0f), Random.Range(-8.0f, 10.0f));
+        //旋转怪物
         Rotation = Random.Range(0, 90);
         Monster.transform.Rotate(0, 0, Rotation);
         Monster.name = string.Concat("Monster", GameManager.MonsterCount);

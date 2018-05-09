@@ -244,7 +244,6 @@
     <Compile Include="Assets\Scripts\Monster.cs" />
     <Compile Include="Assets\Scripts\ReadExcel.cs" />
     <Compile Include="Assets\Scripts\ShootControl.cs" />
-    <Compile Include="Assets\Scripts\Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Data\BallNum_cost.csv.txt" />

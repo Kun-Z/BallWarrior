@@ -26,7 +26,7 @@ public class ShootControl : MonoBehaviour {
                 Line.enabled = false;
                 string objName = string.Concat("Ball", GameManager.BallNum);
                 GameObject obj = GameObject.Find(objName);
-                print("ShootBallName:" + obj);
+                //print("ShootBallName:" + obj);
                 //获取方向
                 Vector2 mTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 mDirection = new Vector2(mTarget.x - obj.transform.position.x, mTarget.y - obj.transform.position.y);

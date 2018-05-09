@@ -8,12 +8,23 @@ public class GameManager : MonoBehaviour {
     public static int BallScale = 1;
     public static bool  IsStart = true;
     public static int Point = 0;
+    public static List<Vector2> MonsterPos;
     public static string[][] BallNumCost;
     public static string[][] BallScaleCost;
     TextAsset CSVtxt;
     string[] lineArr;
     // Use this for initialization
     void Start () {
+        for (int i = 0; i < 25; i++)
+        {
+            for (int j = 0; j < 11; j++)
+            {
+                Vector2 pos = new Vector2(-5 + j, -12 + i);
+                print(pos);
+                MonsterPos.Add(pos);
+            }
+        }
+        print(MonsterPos);
         CSVtxt = Resources.Load("Data/BallNum_cost.csv", typeof(TextAsset)) as TextAsset;
         lineArr = CSVtxt.text.Split("\r"[0]);
         BallNumCost = new string[lineArr.Length][];

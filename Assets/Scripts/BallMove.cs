@@ -10,7 +10,7 @@ public class BallMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        print(GetComponent<Rigidbody2D>().velocity);
+        //print(GetComponent<Rigidbody2D>().velocity);
     }
 
 

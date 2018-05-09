@@ -17,7 +17,7 @@ public class ChangeScale : MonoBehaviour {
     {
         GameManager.BallScale += 1;
         int RandomNum = Random.Range(1, GameManager.BallNum + 1);
-        print("RandomNum:"+ RandomNum);
+        //print("RandomNum:"+ RandomNum);
         string RandomBall = string.Concat("Ball", RandomNum);
         GameObject obj = GameObject.Find(RandomBall);
         Vector3 CurScale = obj.transform.localScale;
