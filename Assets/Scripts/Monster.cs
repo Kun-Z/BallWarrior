@@ -22,6 +22,8 @@ public class Monster : MonoBehaviour {
         GetComponentInChildren<Text>().text = Hp.ToString();
         if (Hp == 0)
         {
+            Vector2 pos = gameObject.transform.position / 1.5f;
+            GameManager.MonsterPos.Add(pos);
             GameObject.Destroy(gameObject);
         }
     }

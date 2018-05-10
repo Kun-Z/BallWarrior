@@ -8,7 +8,7 @@ public class CreateMonster : MonoBehaviour {
     int Rotation;
 	// Use this for initialization
 	void Start () {
-        InvokeRepeating("Create", 2.0f, 5.0f);
+        InvokeRepeating("Create", 2.0f, 1.0f);
 	}
 	
 	// Update is called once per frame

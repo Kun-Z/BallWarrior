@@ -35,7 +35,7 @@ public class ShootControl : MonoBehaviour {
                 //打开box
                 obj.GetComponent<Collider2D>().enabled = true;
                 //发射
-                obj.GetComponent<Rigidbody2D>().AddForce(nDirection * 50);
+                obj.GetComponent<Rigidbody2D>().AddForce(nDirection * 100);
                 //恢复UI
                 GameObject.Find("Canvas/Num").GetComponent<Button>().enabled = true;
                 GameObject.Find("Canvas/Scale").GetComponent<Button>().enabled = true;
