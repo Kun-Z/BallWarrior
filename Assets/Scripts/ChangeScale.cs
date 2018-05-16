@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ChangeScale : MonoBehaviour {
-	// Use this for initialization
-	void Start () {
+    int LV;
+    // Use this for initialization
+    void Start () {
+        GameObject.Find("Canvas/Scale/lvl").GetComponent<Text>().text = string.Concat("LV.", 1);
+        GameObject.Find("Canvas/Scale/bg/cost").GetComponent<Text>().text = GameManager.BallNumCost[1][1];
         GetComponent<Button>().onClick.AddListener(OnClick);
 	}
 	
@@ -24,6 +27,8 @@ public class ChangeScale : MonoBehaviour {
         Vector3 NewScale = CurScale + new Vector3(0.1f, 0.1f, 0);
         obj.transform.localScale = NewScale;
         //改变等级
-        GameObject.Find("Canvas/Scale/lvl").GetComponent<Text>().text = string.Concat("LV.", GameManager.BallScale);
+        LV = GameManager.BallScale;
+        GameObject.Find("Canvas/Scale/lvl").GetComponent<Text>().text = string.Concat("LV.", LV);
+        GameObject.Find("Canvas/Scale/bg/cost").GetComponent<Text>().text = GameManager.BallNumCost[LV][1];
     }
 }

@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ChangeNum : MonoBehaviour {
-	// Use this for initialization
-	void Start () {
+    int LV;
+    // Use this for initialization
+    void Start () {
+        GameObject.Find("Canvas/Num/lvl").GetComponent<Text>().text = string.Concat("LV.", 1);
+        GameObject.Find("Canvas/Num/bg/cost").GetComponent<Text>().text = GameManager.BallNumCost[1][1];
         GetComponent<Button>().onClick.AddListener(OnClick);
     }
 	
@@ -26,7 +29,9 @@ public class ChangeNum : MonoBehaviour {
         GameObject mFather = GameObject.Find("BallList");
         NewBall.transform.parent = mFather.transform;
         //改变等级
-        GameObject.Find("Canvas/Num/lvl").GetComponent<Text>().text = string.Concat("LV.", GameManager.BallNum);
+        LV = GameManager.BallNum;
+        GameObject.Find("Canvas/Num/lvl").GetComponent<Text>().text = string.Concat("LV.", LV);
+        GameObject.Find("Canvas/Num/bg/cost").GetComponent<Text>().text = GameManager.BallNumCost[LV][1];
         //关闭UI点击
         GameObject.Find("Canvas/Num").GetComponent<Button>().enabled = false;
         GameObject.Find("Canvas/Scale").GetComponent<Button>().enabled = false;

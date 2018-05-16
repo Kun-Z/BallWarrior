@@ -68,13 +68,13 @@
     <Compile Include="Assets\Scripts\Monster.cs" />
     <Compile Include="Assets\Scripts\ReadExcel.cs" />
     <Compile Include="Assets\Scripts\ShootControl.cs" />
-    <None Include="Assets\Resources\Data\BallNum_cost.csv.txt" />
-    <None Include="Assets\Resources\Data\BallScale_cost.csv.txt" />
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>F:/BallWarrior/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
+    <None Include="Assets\Resources\Data\BallScale_cost.txt" />
+    <None Include="Assets\Resources\Data\BallNum_cost.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>F:/BallWarrior/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PackageManagerUI.Editor">
+      <HintPath>F:/BallWarrior/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Program Files/Unity2018/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
