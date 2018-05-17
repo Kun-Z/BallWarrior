@@ -43,5 +43,9 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (MonsterPos.Count < 10)
+        {
+            Time.timescale = 0
+        }
 	}
 }
