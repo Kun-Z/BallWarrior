@@ -18,6 +18,7 @@ public class ChangeNum : MonoBehaviour {
 
     private void OnClick()
     {
+        GameManager.Point = GameManager.Point - int.Parse(GameManager.BallNumCost[GameManager.BallNum][1]);
         GameManager.BallNum += 1;
         //print("BallNum:" + GameManager.BallNum);
         GameObject obj = (GameObject)Resources.Load("Prefabs/Ball");
@@ -35,6 +36,11 @@ public class ChangeNum : MonoBehaviour {
         //关闭UI点击
         GameObject.Find("Canvas/Num").GetComponent<Button>().enabled = false;
         GameObject.Find("Canvas/Scale").GetComponent<Button>().enabled = false;
+        //判断按钮状态
+        if (int.Parse(GameManager.BallNumCost[LV][1])>GameManager.Point)
+        {
+            GetComponent<Button>().interactable = false;
+        }
         //设置子弹时间
         Time.timeScale = 0.2f;
         //可以发射

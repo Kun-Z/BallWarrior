@@ -13,11 +13,11 @@ public class GameManager : MonoBehaviour {
     public static string[][] BallScaleCost;
     // Use this for initialization
     void Start () {
-        for (int i = 0; i < 17; i++)
+        for (int i = 0; i <= 20; i++)
         {
-            for (int j = 0; j < 11; j++)
+            for (int j = 0; j <= 12; j++)
             {
-                Vector2 pos = new Vector2(-5 + j, -8 + i);
+                Vector2 pos = new Vector2(-6 + j, -10 + i);
                 MonsterPos.Add(pos);
             }
         }
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour {
 	void Update () {
         if (MonsterPos.Count < 10)
         {
-            Time.timescale = 0
+            Time.timeScale = 0.0f;
         }
 	}
 }

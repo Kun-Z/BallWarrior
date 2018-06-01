@@ -27,7 +27,7 @@ public class CreateMonster : MonoBehaviour {
         Monster.transform.parent = mFather.transform;
         int index = Random.Range(0, GameManager.MonsterPos.Count);
         Vector2 NewPos = GameManager.MonsterPos[index];
-        Monster.transform.position = NewPos * 1.5f;
+        Monster.transform.position = NewPos;
         GameManager.MonsterPos.RemoveAt(index);
         //Monster.transform.position = new Vector2(Random.Range(-4.0f, 5.0f), Random.Range(-8.0f, 10.0f));
         //旋转怪物
