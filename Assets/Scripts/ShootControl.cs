@@ -18,6 +18,10 @@ public class ShootControl : MonoBehaviour {
             Line.enabled = true;
             Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Line.SetPosition(0, MousePos);
+            //关闭UI
+            GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().enabled = false;
+            GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().enabled = false;
+            GameObject.Find("Canvas/TopBar/Pause").GetComponent<Button>().enabled = false;
             if (Input.GetMouseButton(0))
             {
                 //关闭发射
@@ -28,17 +32,18 @@ public class ShootControl : MonoBehaviour {
                 GameObject obj = GameObject.Find(objName);
                 //print("ShootBallName:" + obj);
                 //获取方向
-                Vector2 mTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 mTarget = Input.mousePosition;
                 Vector2 mDirection = new Vector2(mTarget.x - obj.transform.position.x, mTarget.y - obj.transform.position.y);
                 Vector2 nDirection = mDirection.normalized;
                 //print(nDirection);
                 //打开box
-                obj.GetComponent<Collider2D>().enabled = true;
+                obj.GetComponent<CircleCollider2D>().enabled = true;
                 //发射
-                obj.GetComponent<Rigidbody2D>().AddForce(nDirection * 100);
+                obj.GetComponent<Rigidbody2D>().AddForce(nDirection * 10000);
                 //恢复UI
-                GameObject.Find("Canvas/Num").GetComponent<Button>().enabled = true;
-                GameObject.Find("Canvas/Scale").GetComponent<Button>().enabled = true;
+                GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().enabled = true;
+                GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().enabled = true;
+                GameObject.Find("Canvas/TopBar/Pause").GetComponent<Button>().enabled = true;
                 //恢复时间
                 Time.timeScale = 1.0f;
             }

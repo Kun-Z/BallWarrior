@@ -66,7 +66,8 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GetChildren.cs" />
     <Compile Include="Assets\Scripts\Monster.cs" />
-    <Compile Include="Assets\Scripts\ReadExcel.cs" />
+    <Compile Include="Assets\Scripts\Pause.cs" />
+    <Compile Include="Assets\Scripts\PausePage.cs" />
     <Compile Include="Assets\Scripts\ShootControl.cs" />
     <None Include="Assets\Resources\Data\BallScale_cost.txt" />
     <None Include="Assets\Resources\Data\BallNum_cost.txt" />

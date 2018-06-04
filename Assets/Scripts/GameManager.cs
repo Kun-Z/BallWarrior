@@ -11,18 +11,18 @@ public class GameManager : MonoBehaviour {
     public static List<Vector2> MonsterPos = new List<Vector2>();
     public static string[][] BallNumCost;
     public static string[][] BallScaleCost;
+    public static bool IsCost = true;
     // Use this for initialization
     void Start () {
-        for (int i = 0; i <= 20; i++)
+        for (int i = 0; i <= 16; i++)
         {
             for (int j = 0; j <= 12; j++)
             {
-                Vector2 pos = new Vector2(-6 + j, -10 + i);
-                MonsterPos.Add(pos);
+                Vector2 pos = new Vector2(-6 + j, -8 + i);
+                MonsterPos.Add(pos*50);
             }
         }
         MonsterPos.Remove(new Vector2(0, 0));
-
         TextAsset CSVtxt1 = Resources.Load("Data/BallNum_cost", typeof(TextAsset)) as TextAsset;
         //print(CSVtxt1);
         string[] lineArr1 = CSVtxt1.text.Split('\n');

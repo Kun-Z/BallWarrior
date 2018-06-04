@@ -16,13 +16,22 @@ public class Monster : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Hp -= 1;
+        int CurScale = (int)((collision.gameObject.transform.localScale.x - 1)*10+1);
+        Hp -= CurScale;
         GameManager.Point += 1;
-        GameObject.Find("Canvas/Point").GetComponent<Text>().text = GameManager.Point.ToString();
-        GetComponentInChildren<Text>().text = Hp.ToString();
-        if (Hp == 0)
+        if (int.Parse(GameManager.BallNumCost[GameManager.BallNum][1]) <= GameManager.Point)
         {
-            Vector2 pos = gameObject.transform.position;
+            GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = true;
+        }
+        if (int.Parse(GameManager.BallScaleCost[GameManager.BallScale][1]) <= GameManager.Point)
+        {
+            GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable = true;
+        }
+        GameObject.Find("Canvas/TopBar/Point").GetComponent<Text>().text = GameManager.Point.ToString();
+        GetComponentInChildren<Text>().text = Hp.ToString();
+        if (Hp <= 0)
+        {
+            Vector2 pos = gameObject.GetComponent<RectTransform>().anchoredPosition;
             GameManager.MonsterPos.Add(pos);
             GameObject.Destroy(gameObject);
         }

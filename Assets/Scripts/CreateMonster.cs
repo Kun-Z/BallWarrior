@@ -23,13 +23,15 @@ public class CreateMonster : MonoBehaviour {
         GameObject obj = (GameObject)Resources.Load("Prefabs/Monster");
         GameObject Monster = Instantiate(obj);
         Hp = 17;
-        GameObject mFather = GameObject.Find("MonsterList");
-        Monster.transform.parent = mFather.transform;
+        
         int index = Random.Range(0, GameManager.MonsterPos.Count);
         Vector2 NewPos = GameManager.MonsterPos[index];
-        Monster.transform.position = NewPos;
+        //print(NewPos);
+        Monster.GetComponent<RectTransform>().anchoredPosition = NewPos;
         GameManager.MonsterPos.RemoveAt(index);
-        //Monster.transform.position = new Vector2(Random.Range(-4.0f, 5.0f), Random.Range(-8.0f, 10.0f));
+
+        GameObject mFather = GameObject.Find("MonsterList");
+        Monster.transform.SetParent(mFather.transform, false);
         //旋转怪物
         Rotation = Random.Range(0, 90);
         Monster.transform.Rotate(0, 0, Rotation);

@@ -7,8 +7,8 @@ public class ChangeNum : MonoBehaviour {
     int LV;
     // Use this for initialization
     void Start () {
-        GameObject.Find("Canvas/Num/lvl").GetComponent<Text>().text = string.Concat("LV.", 1);
-        GameObject.Find("Canvas/Num/bg/cost").GetComponent<Text>().text = GameManager.BallNumCost[1][1];
+        GameObject.Find("Canvas/BottomBar/Num/lvl").GetComponent<Text>().text = string.Concat("LV.", 1);
+        GameObject.Find("Canvas/BottomBar/Num/bg/cost").GetComponent<Text>().text = GameManager.BallNumCost[1][1];
         GetComponent<Button>().onClick.AddListener(OnClick);
     }
 	
@@ -28,18 +28,20 @@ public class ChangeNum : MonoBehaviour {
         NewBall.name = name;
         //改变父级
         GameObject mFather = GameObject.Find("BallList");
-        NewBall.transform.parent = mFather.transform;
+        NewBall.transform.SetParent(mFather.transform,false);
         //改变等级
         LV = GameManager.BallNum;
-        GameObject.Find("Canvas/Num/lvl").GetComponent<Text>().text = string.Concat("LV.", LV);
-        GameObject.Find("Canvas/Num/bg/cost").GetComponent<Text>().text = GameManager.BallNumCost[LV][1];
+        GameObject.Find("Canvas/BottomBar/Num/lvl").GetComponent<Text>().text = string.Concat("LV.", LV);
+        GameObject.Find("Canvas/BottomBar/Num/bg/cost").GetComponent<Text>().text = GameManager.BallNumCost[LV][1];
         //关闭UI点击
-        GameObject.Find("Canvas/Num").GetComponent<Button>().enabled = false;
-        GameObject.Find("Canvas/Scale").GetComponent<Button>().enabled = false;
         //判断按钮状态
         if (int.Parse(GameManager.BallNumCost[LV][1])>GameManager.Point)
         {
-            GetComponent<Button>().interactable = false;
+            GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = false;
+        }
+        if (int.Parse(GameManager.BallNumCost[GameManager.BallScale][1]) > GameManager.Point)
+        {
+            GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable = false;
         }
         //设置子弹时间
         Time.timeScale = 0.2f;
