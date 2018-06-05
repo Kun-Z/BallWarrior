@@ -13,22 +13,25 @@ public class ShootControl : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.IsStart)
+        if (GameManager.GM.IsStart)
         {
             Line.enabled = true;
             Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Line.SetPosition(0, MousePos);
             //关闭UI
-            GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().enabled = false;
-            GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().enabled = false;
-            GameObject.Find("Canvas/TopBar/Pause").GetComponent<Button>().enabled = false;
+            bool NumStatus = GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable;
+            bool ScaleStatus = GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable;
+            GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = false;
+            GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable = false;
+            GameObject.Find("Canvas/TopBar/Pause").GetComponent<Button>().interactable = false;
+
             if (Input.GetMouseButton(0))
             {
                 //关闭发射
-                GameManager.IsStart = false;
+                GameManager.GM.IsStart = false;
                 //删除连线
                 Line.enabled = false;
-                string objName = string.Concat("Ball", GameManager.BallNum);
+                string objName = string.Concat("Ball", GameManager.GM.BallNum);
                 GameObject obj = GameObject.Find(objName);
                 //print("ShootBallName:" + obj);
                 //获取方向
@@ -39,11 +42,11 @@ public class ShootControl : MonoBehaviour {
                 //打开box
                 obj.GetComponent<CircleCollider2D>().enabled = true;
                 //发射
-                obj.GetComponent<Rigidbody2D>().AddForce(nDirection * 10000);
+                obj.GetComponent<Rigidbody2D>().AddForce(nDirection * 1000);
                 //恢复UI
-                GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().enabled = true;
-                GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().enabled = true;
-                GameObject.Find("Canvas/TopBar/Pause").GetComponent<Button>().enabled = true;
+                GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = NumStatus;
+                GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable = ScaleStatus;
+                GameObject.Find("Canvas/TopBar/Pause").GetComponent<Button>().interactable = true;
                 //恢复时间
                 Time.timeScale = 1.0f;
             }

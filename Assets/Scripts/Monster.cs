@@ -18,21 +18,21 @@ public class Monster : MonoBehaviour {
     {
         int CurScale = (int)((collision.gameObject.transform.localScale.x - 1)*10+1);
         Hp -= CurScale;
-        GameManager.Point += 1;
-        if (int.Parse(GameManager.BallNumCost[GameManager.BallNum][1]) <= GameManager.Point)
+        GameManager.GM.Point += CurScale;
+        if (int.Parse(GameManager.GM.BallNumCost[GameManager.GM.BallNum][1]) <= GameManager.GM.Point)
         {
             GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = true;
         }
-        if (int.Parse(GameManager.BallScaleCost[GameManager.BallScale][1]) <= GameManager.Point)
+        if (int.Parse(GameManager.GM.BallScaleCost[GameManager.GM.BallScale][1]) <= GameManager.GM.Point)
         {
             GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable = true;
         }
-        GameObject.Find("Canvas/TopBar/Point").GetComponent<Text>().text = GameManager.Point.ToString();
+        GameObject.Find("Canvas/TopBar/Point").GetComponent<Text>().text = GameManager.GM.Point.ToString();
         GetComponentInChildren<Text>().text = Hp.ToString();
         if (Hp <= 0)
         {
             Vector2 pos = gameObject.GetComponent<RectTransform>().anchoredPosition;
-            GameManager.MonsterPos.Add(pos);
+            GameManager.GM.MonsterPos.Add(pos);
             GameObject.Destroy(gameObject);
         }
     }

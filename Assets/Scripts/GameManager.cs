@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-    public static int MonsterCount = 0;
-    public static int BallNum = 1;
-    public static int BallScale = 1;
-    public static bool  IsStart = true;
-    public static int Point = 0;
-    public static List<Vector2> MonsterPos = new List<Vector2>();
-    public static string[][] BallNumCost;
-    public static string[][] BallScaleCost;
-    public static bool IsCost = true;
+    public static GameManager GM;
+    public  int MonsterCount = 0;
+    public  int BallNum = 1;
+    public  int BallScale = 1;
+    public bool IsStart = true;
+    public  int Point = 0;
+    public  List<Vector2> MonsterPos = new List<Vector2>();
+    public  string[][] BallNumCost;
+    public  string[][] BallScaleCost;
     // Use this for initialization
+    private void Awake()
+    {
+        GM = this;
+    }
+
     void Start () {
         for (int i = 0; i <= 16; i++)
         {

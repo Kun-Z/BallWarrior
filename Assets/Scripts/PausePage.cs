@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PausePage : MonoBehaviour {
 
@@ -15,7 +13,6 @@ public class PausePage : MonoBehaviour {
         {
             var b = PauseButton[i];
             b.onClick.AddListener(()=> {
-                print(b);
                 Invoke(b.name, 0);
             });
         }
@@ -33,16 +30,12 @@ public class PausePage : MonoBehaviour {
 
     private void Restart()
     {
-        Time.timeScale = 0.0f;
-        GameObject root = GameObject.Find("Canvas");
-        root.transform.Find("PausePage").gameObject.SetActive(true);
+        SceneManager.LoadScene(1);
     }
 
     private void Exit()
     {
-        Time.timeScale = 0.0f;
-        GameObject root = GameObject.Find("Canvas");
-        root.transform.Find("PausePage").gameObject.SetActive(true);
+        SceneManager.LoadScene(1);
     }
 
     private void Continue()

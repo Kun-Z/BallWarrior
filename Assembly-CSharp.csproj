@@ -59,12 +59,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\BallMove.cs" />
     <Compile Include="Assets\Scripts\ChangeNum.cs" />
     <Compile Include="Assets\Scripts\ChangeScale.cs" />
     <Compile Include="Assets\Scripts\CreateMonster.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\GetChildren.cs" />
     <Compile Include="Assets\Scripts\Monster.cs" />
     <Compile Include="Assets\Scripts\Pause.cs" />
     <Compile Include="Assets\Scripts\PausePage.cs" />
