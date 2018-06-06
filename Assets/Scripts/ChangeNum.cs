@@ -37,15 +37,18 @@ public class ChangeNum : MonoBehaviour {
         LV = GameManager.GM.BallNum;
         GameObject.Find("Canvas/BottomBar/Num/lvl").GetComponent<Text>().text = string.Concat("LV.", LV);
         GameObject.Find("Canvas/BottomBar/Num/bg/cost").GetComponent<Text>().text = GameManager.GM.BallNumCost[LV][1];
-        //关闭UI点击
         //判断按钮状态
-        if (int.Parse(GameManager.GM.BallNumCost[LV][1])>GameManager.GM.Point)
+        if (int.Parse(GameManager.GM.BallNumCost[GameManager.GM.BallNum][1]) > GameManager.GM.Point)
         {
             GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = false;
         }
         if (int.Parse(GameManager.GM.BallNumCost[GameManager.GM.BallScale][1]) > GameManager.GM.Point)
         {
             GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable = false;
+        }
+        if (int.Parse(GameManager.GM.BallSpeedCost[GameManager.GM.BallSpeed][1]) > GameManager.GM.Point)
+        {
+            GameObject.Find("Canvas/BottomBar/Speed").GetComponent<Button>().interactable = false;
         }
         //设置子弹时间
         Time.timeScale = 0.2f;

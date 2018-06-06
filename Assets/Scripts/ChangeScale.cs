@@ -34,13 +34,17 @@ public class ChangeScale : MonoBehaviour {
         GameObject.Find("Canvas/BottomBar/Scale/lvl").GetComponent<Text>().text = string.Concat("LV.", LV);
         GameObject.Find("Canvas/BottomBar/Scale/bg/cost").GetComponent<Text>().text = GameManager.GM.BallScaleCost[LV][1];
         //判断按钮状态
-        if (int.Parse(GameManager.GM.BallScaleCost[LV][1]) > GameManager.GM.Point)
+        if (int.Parse(GameManager.GM.BallNumCost[GameManager.GM.BallNum][1]) > GameManager.GM.Point)
+        {
+            GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = false;
+        }
+        if (int.Parse(GameManager.GM.BallNumCost[GameManager.GM.BallScale][1]) > GameManager.GM.Point)
         {
             GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable = false;
         }
-        if (int.Parse(GameManager.GM.BallScaleCost[GameManager.GM.BallNum][1]) > GameManager.GM.Point)
+        if (int.Parse(GameManager.GM.BallSpeedCost[GameManager.GM.BallSpeed][1]) > GameManager.GM.Point)
         {
-            GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = false;
+            GameObject.Find("Canvas/BottomBar/Speed").GetComponent<Button>().interactable = false;
         }
     }
 }

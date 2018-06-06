@@ -42,7 +42,7 @@ public class ShootControl : MonoBehaviour {
                 //打开box
                 obj.GetComponent<CircleCollider2D>().enabled = true;
                 //发射
-                obj.GetComponent<Rigidbody2D>().AddForce(nDirection * 1000);
+                obj.GetComponent<Rigidbody2D>().AddForce(nDirection * (800 + GameManager.GM.BallSpeed*200));
                 //恢复UI
                 GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = NumStatus;
                 GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable = ScaleStatus;

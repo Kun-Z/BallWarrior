@@ -27,6 +27,10 @@ public class Monster : MonoBehaviour {
         {
             GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable = true;
         }
+        if (int.Parse(GameManager.GM.BallSpeedCost[GameManager.GM.BallSpeed][1]) <= GameManager.GM.Point)
+        {
+            GameObject.Find("Canvas/BottomBar/Speed").GetComponent<Button>().interactable = true;
+        }
         GameObject.Find("Canvas/TopBar/Point").GetComponent<Text>().text = GameManager.GM.Point.ToString();
         GetComponentInChildren<Text>().text = Hp.ToString();
         if (Hp <= 0)

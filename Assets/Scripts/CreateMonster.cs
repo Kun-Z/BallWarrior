@@ -22,8 +22,8 @@ public class CreateMonster : MonoBehaviour {
         //print("MonsterCount:" + GameManager.MonsterCount);
         GameObject obj = (GameObject)Resources.Load("Prefabs/Monster");
         GameObject Monster = Instantiate(obj);
-        Hp = 17;
-        
+        Hp = (GameManager.GM.MonsterCount/20+1)*Random.Range(10,20);
+        //print(Hp);
         int index = Random.Range(0, GameManager.GM.MonsterPos.Count);
         Vector2 NewPos = GameManager.GM.MonsterPos[index];
         //print(NewPos);
