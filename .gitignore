@@ -3,5 +3,5 @@ Library/
 Library
 Packages/
 UnityPackageManager/
-*.scsproj
+*.csproj
 *.sln
