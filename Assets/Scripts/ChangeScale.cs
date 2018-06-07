@@ -26,9 +26,12 @@ public class ChangeScale : MonoBehaviour {
         //print("RandomNum:"+ RandomNum);
         string RandomBall = string.Concat("Ball", RandomNum);
         GameObject obj = GameObject.Find(RandomBall);
+        //改变大小
         Vector3 CurScale = obj.transform.localScale;
-        Vector3 NewScale = CurScale + new Vector3(0.1f, 0.1f, 0);
+        Vector3 NewScale = CurScale + new Vector3(1.0f, 1.0f, 0);
         obj.transform.localScale = NewScale;
+        //改变拖尾宽度
+        obj.GetComponent<TrailRenderer>().startWidth = NewScale.x * 0.3f;
         //改变等级
         LV = GameManager.GM.BallScale;
         GameObject.Find("Canvas/BottomBar/Scale/lvl").GetComponent<Text>().text = string.Concat("LV.", LV);

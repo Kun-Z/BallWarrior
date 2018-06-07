@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Monster : MonoBehaviour {
     public int Hp;
     public int Id;
+    public AudioClip[] SoundClip;
+    public AudioSource Sound;
 	// Use this for initialization
 	void Start () {
     }
@@ -16,7 +18,8 @@ public class Monster : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        int CurScale = (int)((collision.gameObject.transform.localScale.x - 1)*10+1);
+        RandomSound();
+        int CurScale = (int)((collision.gameObject.transform.localScale.x - 13)+1);
         Hp -= CurScale;
         GameManager.GM.Point += CurScale;
         if (int.Parse(GameManager.GM.BallNumCost[GameManager.GM.BallNum][1]) <= GameManager.GM.Point)
@@ -38,6 +41,23 @@ public class Monster : MonoBehaviour {
             Vector2 pos = gameObject.GetComponent<RectTransform>().anchoredPosition;
             GameManager.GM.MonsterPos.Add(pos);
             GameObject.Destroy(gameObject);
+            Slide();
         }
+    }
+
+    private void RandomSound()
+    {
+        //int index = Random.Range(0, SoundClip.Length);
+        //Sound.clip = SoundClip[index];
+        Sound.volume = Random.Range(0.2f, 0.6f);
+        Sound.Play();
+    }
+
+    private void Slide()
+    {
+        float rate = 1 - (GameManager.GM.MonsterPos.Count * 1.0f / GameManager.GM.MonsterNum);
+        GameObject.Find("Canvas/TopBar/Slider").GetComponent<Slider>().value = rate;
+        string str = (rate * 100).ToString("#0.0");
+        GameObject.Find("Canvas/TopBar/Slider/Text").GetComponent<Text>().text = string.Concat(str, "%");
     }
 }

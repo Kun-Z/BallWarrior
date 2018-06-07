@@ -19,11 +19,10 @@ public class ShootControl : MonoBehaviour {
             Vector2 MousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Line.SetPosition(0, MousePos);
             //关闭UI
-            bool NumStatus = GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable;
-            bool ScaleStatus = GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable;
-            GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = false;
-            GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable = false;
-            GameObject.Find("Canvas/TopBar/Pause").GetComponent<Button>().interactable = false;
+            GameObject root1 = GameObject.Find("Canvas/BottomBar");
+            root1.transform.Find("Cover").gameObject.SetActive(true);
+            GameObject root2 = GameObject.Find("Canvas/TopBar");
+            root2.transform.Find("Cover").gameObject.SetActive(true);
 
             if (Input.GetMouseButton(0))
             {
@@ -36,20 +35,30 @@ public class ShootControl : MonoBehaviour {
                 //print("ShootBallName:" + obj);
                 //获取方向
                 Vector2 mTarget = Input.mousePosition;
+                print(mTarget);
+                //print(Camera.main.WorldToScreenPoint(Input.mousePosition));
+                //print(Camera.main.WorldToViewportPoint(Input.mousePosition));
+                print(obj.transform.position);
+                print(Camera.main.ViewportToScreenPoint(obj.transform.position));
+                print(Camera.main.ViewportToWorldPoint(obj.transform.position));
                 Vector2 mDirection = new Vector2(mTarget.x - obj.transform.position.x, mTarget.y - obj.transform.position.y);
+                print(mDirection);
                 Vector2 nDirection = mDirection.normalized;
                 //print(nDirection);
                 //打开box
                 obj.GetComponent<CircleCollider2D>().enabled = true;
                 //发射
                 obj.GetComponent<Rigidbody2D>().AddForce(nDirection * (800 + GameManager.GM.BallSpeed*200));
-                //恢复UI
-                GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = NumStatus;
-                GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable = ScaleStatus;
-                GameObject.Find("Canvas/TopBar/Pause").GetComponent<Button>().interactable = true;
                 //恢复时间
                 Time.timeScale = 1.0f;
+                //恢复UI
+                Invoke("ResetUI", 0.3f);
             }
         }
     }
- }
+    private void ResetUI()
+    {
+        GameObject.Find("Canvas/BottomBar/Cover").SetActive(false);
+        GameObject.Find("Canvas/TopBar/Cover").SetActive(false);
+    }
+}

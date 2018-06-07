@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 58153792023202354}
   - component: {fileID: 50926102523407904}
   - component: {fileID: 96665348810053272}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ TrailRenderer:
   m_Time: 0.05
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 4.5
+    widthMultiplier: 3.9
     widthCurve:
       serializedVersion: 2
       m_Curve:

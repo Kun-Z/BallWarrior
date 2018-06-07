@@ -23,13 +23,12 @@ public class CreateMonster : MonoBehaviour {
         GameObject obj = (GameObject)Resources.Load("Prefabs/Monster");
         GameObject Monster = Instantiate(obj);
         Hp = (GameManager.GM.MonsterCount/20+1)*Random.Range(10,20);
-        //print(Hp);
+        //随机位置;
         int index = Random.Range(0, GameManager.GM.MonsterPos.Count);
         Vector2 NewPos = GameManager.GM.MonsterPos[index];
-        //print(NewPos);
         Monster.GetComponent<RectTransform>().anchoredPosition = NewPos;
         GameManager.GM.MonsterPos.RemoveAt(index);
-
+        //设置父级
         GameObject mFather = GameObject.Find("MonsterList");
         Monster.transform.SetParent(mFather.transform, false);
         //旋转怪物
@@ -40,5 +39,15 @@ public class CreateMonster : MonoBehaviour {
         Monster.GetComponent<Monster>().Id = GameManager.GM.MonsterCount;
         Monster.GetComponentInChildren<Text>().text = Hp.ToString();
         Monster.GetComponentInChildren<Text>().transform.Rotate(0, 0, -Rotation);
+        //设置进度条
+        Slide();
+    }
+
+    private void Slide()
+    {
+        float rate = 1 - (GameManager.GM.MonsterPos.Count * 1.0f / GameManager.GM.MonsterNum);
+        GameObject.Find("Canvas/TopBar/Slider").GetComponent<Slider>().value = rate;
+        string str = (rate * 100).ToString("#0.0");
+        GameObject.Find("Canvas/TopBar/Slider/Text").GetComponent<Text>().text = string.Concat(str, "%");
     }
 }

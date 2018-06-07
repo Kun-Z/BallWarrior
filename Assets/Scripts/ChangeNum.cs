@@ -28,7 +28,7 @@ public class ChangeNum : MonoBehaviour {
         NewBall.name = name;
         //改变小球颜色
         Color newColor = Random.ColorHSV(0f, 1f,0f,1f,0f,1f);
-        NewBall.GetComponent<Image>().color = newColor;
+        NewBall.GetComponent<SpriteRenderer>().color = newColor;
         NewBall.GetComponent<TrailRenderer>().startColor = newColor;
         //改变父级
         GameObject mFather = GameObject.Find("BallList");

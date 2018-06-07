@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public int BallNum = 1;
     public int BallScale = 1;
     public int BallSpeed = 1;
+    public int MonsterNum = 1;
     public bool IsStart = true;
     public int Point = 0;
     public List<Vector2> MonsterPos = new List<Vector2>();
@@ -21,16 +22,16 @@ public class GameManager : MonoBehaviour {
 }
 
     void Start () {
-        for (int i = 0; i <= 16; i++)
+        for (int i = 0; i <= 20; i++)
         {
             for (int j = 0; j <= 12; j++)
             {
-                Vector2 pos = new Vector2(-6 + j, -8 + i);
+                Vector2 pos = new Vector2(-6 + j, -10 + i);
                 MonsterPos.Add(pos*50);
             }
         }
         MonsterPos.Remove(new Vector2(0, 0));
-
+        MonsterNum = MonsterPos.Count;
         TextAsset CSVtxt1 = Resources.Load("Data/BallNum_cost", typeof(TextAsset)) as TextAsset;
         //print(CSVtxt1);
         string[] lineArr1 = CSVtxt1.text.Split('\n');
