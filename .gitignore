@@ -1,6 +1,6 @@
 .vs/
 Library/
-Library
+obj/
 Packages/
 UnityPackageManager/
 *.csproj

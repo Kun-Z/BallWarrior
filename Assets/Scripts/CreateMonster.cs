@@ -16,7 +16,7 @@ public class CreateMonster : MonoBehaviour {
 
     private void StratCreat()
     {
-        InvokeRepeating("Create", 2.0f, 0.2f);
+        InvokeRepeating("Create", 2.0f, 1.0f);
     }
 
     void Create()

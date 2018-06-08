@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
         int yCount = (int)(y - 240) / 50;
         int boxY = (int)(y - yCount * 50) / 2 + 25;
         //开始动画
+        Time.timeScale = 1.0f;
         GameObject obj = GameObject.Find("Ball0");
         Vector2 BallPosition = Camera.main.WorldToScreenPoint(obj.transform.position);
         Vector2 mDirection = new Vector2(Random.Range(-100, 100), Random.Range(-100, 100));

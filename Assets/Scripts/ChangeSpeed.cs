@@ -18,6 +18,7 @@ public class ChangeSpeed : MonoBehaviour {
 
     private void OnClick()
     {
+        GameManager.GM.Point = GameManager.GM.Point - int.Parse(GameManager.GM.Cost[GameManager.GM.BallSpeed][3]);
         GameManager.GM.BallSpeed += 1;
         //print("BallSpeed:" + GameManager.BallSpeed);
         int BallNum = GameManager.GM.BallNum;
