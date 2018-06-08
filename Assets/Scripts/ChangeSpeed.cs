@@ -8,7 +8,7 @@ public class ChangeSpeed : MonoBehaviour {
     // Use this for initialization
     void Start () {
         GameObject.Find("Canvas/BottomBar/Speed/lvl").GetComponent<Text>().text = string.Concat("LV.", 1);
-        GameObject.Find("Canvas/BottomBar/Speed/bg/cost").GetComponent<Text>().text = GameManager.GM.BallSpeedCost[1][1];
+        GameObject.Find("Canvas/BottomBar/Speed/bg/cost").GetComponent<Text>().text = GameManager.GM.Cost[1][3];
         GetComponent<Button>().onClick.AddListener(OnClick);
     }
 	
@@ -32,20 +32,9 @@ public class ChangeSpeed : MonoBehaviour {
         //改变等级
         LV = GameManager.GM.BallSpeed;
         GameObject.Find("Canvas/BottomBar/Speed/lvl").GetComponent<Text>().text = string.Concat("LV.", LV);
-        GameObject.Find("Canvas/BottomBar/Speed/bg/cost").GetComponent<Text>().text = GameManager.GM.BallSpeedCost[LV][1];
+        GameObject.Find("Canvas/BottomBar/Speed/bg/cost").GetComponent<Text>().text = GameManager.GM.Cost[LV][3];
         //判断按钮状态
-        if (int.Parse(GameManager.GM.BallNumCost[GameManager.GM.BallNum][1])>GameManager.GM.Point)
-        {
-            GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = false;
-        }
-        if (int.Parse(GameManager.GM.BallNumCost[GameManager.GM.BallScale][1]) > GameManager.GM.Point)
-        {
-            GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable = false;
-        }
-        if (int.Parse(GameManager.GM.BallSpeedCost[GameManager.GM.BallSpeed][1]) > GameManager.GM.Point)
-        {
-            GameObject.Find("Canvas/BottomBar/Speed").GetComponent<Button>().interactable = false;
-        }
+        GameObject.Find("Canvas/BottomBar").SendMessage("Status");
     }
 
 }

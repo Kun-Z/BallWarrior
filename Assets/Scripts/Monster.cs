@@ -19,21 +19,11 @@ public class Monster : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         RandomSound();
-        int CurScale = (int)((collision.gameObject.transform.localScale.x - 13)+1);
+        int CurScale = (int)((collision.gameObject.transform.localScale.x - 1)*2+1);
         Hp -= CurScale;
         GameManager.GM.Point += CurScale;
-        if (int.Parse(GameManager.GM.BallNumCost[GameManager.GM.BallNum][1]) <= GameManager.GM.Point)
-        {
-            GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = true;
-        }
-        if (int.Parse(GameManager.GM.BallScaleCost[GameManager.GM.BallScale][1]) <= GameManager.GM.Point)
-        {
-            GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable = true;
-        }
-        if (int.Parse(GameManager.GM.BallSpeedCost[GameManager.GM.BallSpeed][1]) <= GameManager.GM.Point)
-        {
-            GameObject.Find("Canvas/BottomBar/Speed").GetComponent<Button>().interactable = true;
-        }
+        //判断按钮状态
+        GameObject.Find("Canvas/BottomBar").SendMessage("AntiStatus");
         GameObject.Find("Canvas/TopBar/Point").GetComponent<Text>().text = GameManager.GM.Point.ToString();
         GetComponentInChildren<Text>().text = Hp.ToString();
         if (Hp <= 0)
@@ -41,23 +31,15 @@ public class Monster : MonoBehaviour {
             Vector2 pos = gameObject.GetComponent<RectTransform>().anchoredPosition;
             GameManager.GM.MonsterPos.Add(pos);
             GameObject.Destroy(gameObject);
-            Slide();
+            GameObject.Find("Canvas/TopBar/Slider").SendMessage("SetSlide");
         }
     }
 
     private void RandomSound()
     {
-        //int index = Random.Range(0, SoundClip.Length);
-        //Sound.clip = SoundClip[index];
+        int index = Random.Range(0, SoundClip.Length);
+        Sound.clip = SoundClip[index];
         Sound.volume = Random.Range(0.2f, 0.6f);
         Sound.Play();
-    }
-
-    private void Slide()
-    {
-        float rate = 1 - (GameManager.GM.MonsterPos.Count * 1.0f / GameManager.GM.MonsterNum);
-        GameObject.Find("Canvas/TopBar/Slider").GetComponent<Slider>().value = rate;
-        string str = (rate * 100).ToString("#0.0");
-        GameObject.Find("Canvas/TopBar/Slider/Text").GetComponent<Text>().text = string.Concat(str, "%");
     }
 }

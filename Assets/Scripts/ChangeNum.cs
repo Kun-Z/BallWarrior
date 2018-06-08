@@ -8,7 +8,7 @@ public class ChangeNum : MonoBehaviour {
     // Use this for initialization
     void Start () {
         GameObject.Find("Canvas/BottomBar/Num/lvl").GetComponent<Text>().text = string.Concat("LV.", 1);
-        GameObject.Find("Canvas/BottomBar/Num/bg/cost").GetComponent<Text>().text = GameManager.GM.BallNumCost[1][1];
+        GameObject.Find("Canvas/BottomBar/Num/bg/cost").GetComponent<Text>().text = GameManager.GM.Cost[1][1];
         GetComponent<Button>().onClick.AddListener(OnClick);
     }
 	
@@ -18,7 +18,10 @@ public class ChangeNum : MonoBehaviour {
 
     private void OnClick()
     {
-        GameManager.GM.Point = GameManager.GM.Point - int.Parse(GameManager.GM.BallNumCost[GameManager.GM.BallNum][1]);
+        if (GameManager.GM.BallNum>0)
+        {
+            GameManager.GM.Point = GameManager.GM.Point - int.Parse(GameManager.GM.Cost[GameManager.GM.BallNum][1]);
+        }
         GameManager.GM.BallNum += 1;
         //print("BallNum:" + GameManager.BallNum);
         GameObject obj = (GameObject)Resources.Load("Prefabs/Ball");
@@ -28,7 +31,7 @@ public class ChangeNum : MonoBehaviour {
         NewBall.name = name;
         //改变小球颜色
         Color newColor = Random.ColorHSV(0f, 1f,0f,1f,0f,1f);
-        NewBall.GetComponent<SpriteRenderer>().color = newColor;
+        NewBall.GetComponent<Image>().color = newColor;
         NewBall.GetComponent<TrailRenderer>().startColor = newColor;
         //改变父级
         GameObject mFather = GameObject.Find("BallList");
@@ -36,20 +39,9 @@ public class ChangeNum : MonoBehaviour {
         //改变等级
         LV = GameManager.GM.BallNum;
         GameObject.Find("Canvas/BottomBar/Num/lvl").GetComponent<Text>().text = string.Concat("LV.", LV);
-        GameObject.Find("Canvas/BottomBar/Num/bg/cost").GetComponent<Text>().text = GameManager.GM.BallNumCost[LV][1];
+        GameObject.Find("Canvas/BottomBar/Num/bg/cost").GetComponent<Text>().text = GameManager.GM.Cost[LV][1];
         //判断按钮状态
-        if (int.Parse(GameManager.GM.BallNumCost[GameManager.GM.BallNum][1]) > GameManager.GM.Point)
-        {
-            GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = false;
-        }
-        if (int.Parse(GameManager.GM.BallNumCost[GameManager.GM.BallScale][1]) > GameManager.GM.Point)
-        {
-            GameObject.Find("Canvas/BottomBar/Scale").GetComponent<Button>().interactable = false;
-        }
-        if (int.Parse(GameManager.GM.BallSpeedCost[GameManager.GM.BallSpeed][1]) > GameManager.GM.Point)
-        {
-            GameObject.Find("Canvas/BottomBar/Speed").GetComponent<Button>().interactable = false;
-        }
+        GameObject.Find("Canvas/BottomBar").SendMessage("Status");
         //设置子弹时间
         Time.timeScale = 0.2f;
         //可以发射
