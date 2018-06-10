@@ -28,7 +28,7 @@ public class ChangeSpeed : MonoBehaviour {
             GameObject obj = GameObject.Find(name);
             Vector2 nDirection = obj.GetComponent<Rigidbody2D>().velocity.normalized;
             //print(nDirection);
-            obj.GetComponent<Rigidbody2D>().AddForce(nDirection * 200);
+            obj.GetComponent<Rigidbody2D>().AddForce(nDirection * 50);
         }
         //改变等级
         LV = GameManager.GM.BallSpeed;

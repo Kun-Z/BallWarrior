@@ -17,6 +17,7 @@ public class ButtonStatus : MonoBehaviour {
 
     private void Status()
     {
+        GameObject.Find("Canvas/TopBar/Point").GetComponent<Text>().text = string.Format("{0:N0}", GameManager.GM.Point);
         if (int.Parse(GameManager.GM.Cost[GameManager.GM.BallNum][1]) > GameManager.GM.Point)
         {
             GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = false;
@@ -33,6 +34,7 @@ public class ButtonStatus : MonoBehaviour {
 
     private void AntiStatus()
     {
+        GameObject.Find("Canvas/TopBar/Point").GetComponent<Text>().text = string.Format("{0:N0}", GameManager.GM.Point);
         if (int.Parse(GameManager.GM.Cost[GameManager.GM.BallNum][1]) <= GameManager.GM.Point)
         {
             GameObject.Find("Canvas/BottomBar/Num").GetComponent<Button>().interactable = true;

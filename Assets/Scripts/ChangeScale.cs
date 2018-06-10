@@ -20,7 +20,6 @@ public class ChangeScale : MonoBehaviour {
     private void OnClick()
     {
         GameManager.GM.Point = GameManager.GM.Point - int.Parse(GameManager.GM.Cost[GameManager.GM.BallScale][2]);
-        
         GameManager.GM.BallScale += 1;
         int RandomNum = Random.Range(1, GameManager.GM.BallNum + 1);
         //print("RandomNum:"+ RandomNum);
@@ -28,7 +27,7 @@ public class ChangeScale : MonoBehaviour {
         GameObject obj = GameObject.Find(RandomBall);
         //改变大小
         Vector3 CurScale = obj.transform.localScale;
-        Vector3 NewScale = CurScale + new Vector3(0.5f, 0.5f, 0);
+        Vector3 NewScale = CurScale + new Vector3(0.2f, 0.2f, 0);
         obj.transform.localScale = NewScale;
         //改变拖尾宽度
         obj.GetComponent<TrailRenderer>().startWidth = NewScale.x * 3.7f;

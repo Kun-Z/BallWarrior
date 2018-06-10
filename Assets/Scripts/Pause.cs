@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Pause : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+    AudioSource Sound;
+    // Use this for initialization
+    void Start () {
         GetComponent<Button>().onClick.AddListener(OnClick);
+        Sound = gameObject.GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -17,6 +18,7 @@ public class Pause : MonoBehaviour {
 
     private void OnClick()
     {
+        Sound.Play();
         Time.timeScale = 0.0f;
         GameObject root = GameObject.Find("Canvas");
         root.transform.Find("PausePage").gameObject.SetActive(true);

@@ -2,29 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Monster : MonoBehaviour {
     public int Hp;
     public int Id;
-    public AudioClip[] SoundClip;
-    public AudioSource Sound;
+    public float BirthTime;
+    AudioSource Sound;
+    int TimeSpacing;
+    float h;
 	// Use this for initialization
 	void Start () {
+        Sound = gameObject.GetComponent<AudioSource>();
+        BirthTime = Time.time;
+        TimeSpacing = Random.Range(40,60);
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate() {
+        if (Time.time-BirthTime > TimeSpacing)
+        {
+            h += 0.2f;
+            RectTransform[] RectTransform = gameObject.GetComponentsInChildren<RectTransform>();
+            if (h >= 46)
+            {
+                BirthTime = Time.time;
+                Hp = Hp * 2;
+                GetComponentInChildren<Text>().text = Hp.ToString();
+                gameObject.GetComponent<RectTransform>().DOShakeScale(1);
+                h = 0;
+                TimeSpacing += 10;
+                Sound.volume = 0.5f;
+                Sound.Play();
+            }
+            RectTransform[1].sizeDelta = new Vector2(46,h);
+        }
 	}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        RandomSound();
-        int CurScale = (int)((collision.gameObject.transform.localScale.x - 1)*2+1);
+        int CurScale = (int)((collision.gameObject.transform.localScale.x - 1)*5+1);
         Hp -= CurScale;
         GameManager.GM.Point += CurScale;
         //判断按钮状态
         GameObject.Find("Canvas/BottomBar").SendMessage("AntiStatus");
-        GameObject.Find("Canvas/TopBar/Point").GetComponent<Text>().text = GameManager.GM.Point.ToString();
         GetComponentInChildren<Text>().text = Hp.ToString();
         if (Hp <= 0)
         {
@@ -33,13 +54,5 @@ public class Monster : MonoBehaviour {
             GameObject.Destroy(gameObject);
             GameObject.Find("Canvas/TopBar/Slider").SendMessage("SetSlide");
         }
-    }
-
-    private void RandomSound()
-    {
-        int index = Random.Range(0, SoundClip.Length);
-        Sound.clip = SoundClip[index];
-        Sound.volume = Random.Range(0.2f, 0.6f);
-        Sound.Play();
     }
 }

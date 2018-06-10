@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class OverPage : MonoBehaviour {
 
@@ -10,24 +11,24 @@ public class OverPage : MonoBehaviour {
         int Point = PlayerPrefs.GetInt("Point");
         int Record = PlayerPrefs.GetInt("Record");
         GameObject root = GameObject.Find("Canvas/OverPage/Point");
+        string PointText = string.Format("{0:N0}", Point);
+        root.GetComponent<Text>().text = PointText;
+        root.GetComponent<RectTransform>().DOShakePosition(3,3);
         if (Point>Record)
         {
             root.transform.Find("NewRecord").gameObject.SetActive(true);
             PlayerPrefs.SetInt("LastRecord", Record);
             PlayerPrefs.SetInt("Record", Point);
-            root.GetComponent<Text>().text = Point.ToString();
-            int LastRecord = PlayerPrefs.GetInt("LastRecord");
-            if (LastRecord == 0)
+            if (Record == 0)
             {
                 GameObject.Find("Canvas/OverPage/Point/Record").SetActive(false);
                 return;
             }
-            GameObject.Find("Canvas/OverPage/Point/Record").GetComponent<Text>().text = string.Concat("上个记录：", LastRecord);
+            GameObject.Find("Canvas/OverPage/Point/Record").GetComponent<Text>().text = string.Concat("上个记录：", string.Format("{0:N0}", Record));
         }
         else
         {
-            root.GetComponent<Text>().text = Point.ToString();
-            GameObject.Find("Canvas/OverPage/Point/Record").GetComponent<Text>().text = string.Concat("最高记录：", Record);
+            GameObject.Find("Canvas/OverPage/Point/Record").GetComponent<Text>().text = string.Concat("最高记录：", string.Format("{0:N0}", Record));
         }
 
 	}

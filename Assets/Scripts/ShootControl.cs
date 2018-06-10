@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class ShootControl : MonoBehaviour {
     LineRenderer Line;
+    AudioSource Sound;
     // Use this for initialization
     void Start () {
         Line = Camera.main.GetComponent<LineRenderer>();
+        Sound = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -41,9 +43,10 @@ public class ShootControl : MonoBehaviour {
                 //打开box
                 obj.GetComponent<CircleCollider2D>().enabled = true;
                 //发射
-                obj.GetComponent<Rigidbody2D>().AddForce(nDirection * (200 + GameManager.GM.BallSpeed*200));
+                obj.GetComponent<Rigidbody2D>().AddForce(nDirection * (400 + GameManager.GM.BallSpeed*50));
                 //恢复时间
                 Time.timeScale = 1.0f;
+                Sound.Play();
                 //恢复UI
                 Invoke("ResetUI", 0.3f);
             }

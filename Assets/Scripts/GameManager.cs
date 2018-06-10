@@ -27,9 +27,12 @@ public class GameManager : MonoBehaviour {
 
     void Start () {
         //计算屏幕高度
+        int Cube = 70;
         float y = (float)750 / Screen.width * Screen.height;
-        int yCount = (int)(y - 240) / 50;
-        int boxY = (int)(y - yCount * 50) / 2 + 25;
+        int yCount = (int)(y - 240) / Cube;
+        int boxY = (int)(y - yCount * Cube) / 2 + Cube/2;
+        int xCount = (int)(750 - 50) / Cube;
+        int boxX = (int)(750 - xCount * Cube) / 2 + Cube/2;
         //开始动画
         Time.timeScale = 1.0f;
         GameObject obj = GameObject.Find("Ball0");
@@ -39,14 +42,13 @@ public class GameManager : MonoBehaviour {
         //打开box
         obj.GetComponent<CircleCollider2D>().enabled = true;
         //发射
-        obj.GetComponent<Rigidbody2D>().WakeUp();
-        obj.GetComponent<Rigidbody2D>().AddForce(nDirection * (200 + BallSpeed * 200));
+        obj.GetComponent<Rigidbody2D>().AddForce(nDirection * 400);
         //怪物坐标
         for (int i = 0; i < yCount; i++)
         {
-            for (int j = 0; j <= 13; j++)
+            for (int j = 0; j < xCount; j++)
             {
-                Vector2 pos = new Vector2(50 + j * 50, boxY + i * 50);
+                Vector2 pos = new Vector2(boxX + j * Cube, boxY + i * Cube);
                 float dis = Vector2.Distance(BallPosition, pos);
                 if (dis>30)
                 {
@@ -70,7 +72,6 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 	}
 
 }

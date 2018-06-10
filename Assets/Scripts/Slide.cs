@@ -17,7 +17,7 @@ public class Slide : MonoBehaviour {
 
     private void SetSlide()
     {
-        float rate = (GameManager.GM.MonsterNum - GameManager.GM.MonsterPos.Count) * 1.0f / 88;
+        float rate = (GameManager.GM.MonsterNum - GameManager.GM.MonsterPos.Count) * 1.0f / 50;
         GetComponent<Slider>().value = rate;
         string str = (rate * 100).ToString("#0.0");
         GetComponentInChildren<Text>().text = string.Concat(str, "%");
