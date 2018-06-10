@@ -24,11 +24,11 @@ public class OverPage : MonoBehaviour {
                 GameObject.Find("Canvas/OverPage/Point/Record").SetActive(false);
                 return;
             }
-            GameObject.Find("Canvas/OverPage/Point/Record").GetComponent<Text>().text = string.Concat("上个记录：", string.Format("{0:N0}", Record));
+            GameObject.Find("Canvas/OverPage/Point/Record").GetComponent<Text>().text = string.Concat("The Last Record:", string.Format("{0:N0}", Record));
         }
         else
         {
-            GameObject.Find("Canvas/OverPage/Point/Record").GetComponent<Text>().text = string.Concat("最高记录：", string.Format("{0:N0}", Record));
+            GameObject.Find("Canvas/OverPage/Point/Record").GetComponent<Text>().text = string.Concat("Record:", string.Format("{0:N0}", Record));
         }
 
 	}

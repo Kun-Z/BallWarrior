@@ -120,7 +120,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8BC4\u4EF7"
+  m_Text: Praise
 --- !u!114 &114592431384623234
 MonoBehaviour:
   m_ObjectHideFlags: 1
