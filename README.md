@@ -1,2 +1,2 @@
 # BallWarrior
-[![Watch the video](https://github.com/Kun-Z/Image/raw/master/BallWarrior1.png)](https://github.com/Kun-Z/Image/raw/master/BallWarrior.mp4)
+![页面1](https://github.com/Kun-Z/Image/raw/master/BallWarrior.gif)
