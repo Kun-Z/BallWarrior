@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class PageStart : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class PageStart : MonoBehaviour {
 	void Start () {
         //Time.timeScale = 0.0f;
         GetComponent<Button>().onClick.AddListener(OnClick);
+        GetComponent<RectTransform>().DOShakePosition(1, 8).SetLoops(-1);
     }
 	
 	// Update is called once per frame

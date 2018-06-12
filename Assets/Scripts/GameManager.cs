@@ -49,8 +49,8 @@ public class GameManager : MonoBehaviour {
             for (int j = 0; j < xCount; j++)
             {
                 Vector2 pos = new Vector2(boxX + j * Cube, boxY + i * Cube);
-                float dis = Vector2.Distance(BallPosition, pos);
-                if (dis>30)
+                float dis = Vector2.Distance(pos, new Vector2(375,y/2));
+                if (dis>50)
                 {
                     MonsterPos.Add(pos);
                 }
